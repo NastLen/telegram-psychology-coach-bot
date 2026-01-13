@@ -58,18 +58,38 @@ async def start_bot():
     # Set default commands
     await set_default_commands()
     
+    retry_count = 0
+    max_retries = 15
+    
+    while retry_count < max_retries:
+        try:
+            logger.info("🤖 Bot started polling...")
+            # Disable signal handling to avoid conflicts in multi-threaded environment (Render + Uvicorn)
+            await dp.start_polling(
+                bot, 
+                allowed_updates=dp.resolve_used_update_types(),
+                handle_signals=False  # Отключаем обработку SIGINT/SIGTERM
+            )
+            # If we get here, polling stopped normally
+            break
+        except Exception as e:
+            if "Conflict" in str(e):
+                # Handle Telegram conflict error gracefully
+                retry_count += 1
+                wait_time = min(5 * (2 ** retry_count), 60)  # Exponential backoff, max 60 seconds
+                logger.warning(f"Conflict detected. Retrying in {wait_time}s... (attempt {retry_count}/{max_retries})")
+                await asyncio.sleep(wait_time)
+            else:
+                logger.error(f"Unexpected bot error: {e}")
+                break
+        finally:
+            if retry_count >= max_retries:
+                logger.error(f"Max retries ({max_retries}) reached. Stopping bot.")
+    
     try:
-        logger.info("🤖 Bot started polling...")
-        # Disable signal handling to avoid conflicts in multi-threaded environment (Render + Uvicorn)
-        await dp.start_polling(
-            bot, 
-            allowed_updates=dp.resolve_used_update_types(),
-            handle_signals=False  # Отключаем обработку SIGINT/SIGTERM
-        )
-    except Exception as e:
-        logger.error(f"Bot error: {e}")
-    finally:
         await bot.session.close()
+    except Exception as e:
+        logger.error(f"Error closing bot session: {e}")
 
 def run_bot():
     """Run bot in separate event loop"""
