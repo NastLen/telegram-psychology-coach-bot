@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  coach-bot:
+    build: .
+    container_name: coach-bot
+    restart: unless-stopped
+    environment:
+      - BOT_TOKEN=8538542036:AAEOnFstif9BBcfoSYV4DK0i_icM4Sw6Tqs
+      - ADMIN_CHAT_ID=YOUR_ADMIN_ID_HERE
+    volumes:
+      - ./config.py:/app/config.py:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
