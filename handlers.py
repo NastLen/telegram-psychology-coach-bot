@@ -89,21 +89,19 @@ async def contact_handler(message: Message):
     contact_message = f"""
 📞 Контакты
 
-Есть вопросы перед бронированием? Напишите мне:
+Быстрые способы связи:
 
-📧 Email: {EMAIL}
 💬 WhatsApp: нажмите кнопку ниже
-
-Или задайте вопрос прямо боту — я передам его менеджеру.
+📧 Email: elena.kravtsova@example.com
+💭 Или задайте вопрос прямо боту — я передам его менеджеру
 """
     
     from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
     
     buttons = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="💬 WhatsApp", url=WHATSAPP_URL)],
-            [InlineKeyboardButton(text="📧 Email", url=f"mailto:{EMAIL}")],
-            [InlineKeyboardButton(text="❓ Задать вопрос", callback_data="ask_question")],
+            [InlineKeyboardButton(text="💬 Написать WhatsApp", url=WHATSAPP_URL)],
+            [InlineKeyboardButton(text="❓ Задать вопрос боту", callback_data="ask_question")],
         ]
     )
     
