@@ -12,7 +12,7 @@ BOOKING_URL = "https://calendly.com/your-coach"  # Replace with actual Calendly 
 WEBSITE_URL = "https://your-website.com"  # Replace with your website
 PAYMENT_URL = "https://your-website.com/pricing"  # Replace with payment/pricing page
 WHATSAPP_URL = "https://wa.me/493012345678"  # WhatsApp: +49 30 12345678
-EMAIL = "your.email@example.com"  # Replace with actual email
+EMAIL = "elena.kravtsova@example.com"  # Психолог Елена Кравцова
 
 # Content (easily editable)
 ABOUT_TEXT = """
