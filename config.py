@@ -8,9 +8,9 @@ BOT_TOKEN = "8538542036:AAEOnFstif9BBcfoSYV4DK0i_icM4Sw6Tqs"
 ADMIN_CHAT_ID = None  # Replace with actual chat ID (e.g., 123456789)
 
 # External links
-BOOKING_URL = "https://calendly.com/your-coach"  # Replace with actual Calendly or booking link
-WEBSITE_URL = "https://your-website.com"  # Replace with your website
-PAYMENT_URL = "https://your-website.com/pricing"  # Replace with payment/pricing page
+BOOKING_URL = "https://calendly.com/mindcare-berlin/consultation"  # Calendly ссылка
+WEBSITE_URL = "https://mindcare-berlin.example.com"  # Вебсайт
+PAYMENT_URL = "https://mindcare-berlin.example.com/pricing"  # Страница оплаты
 WHATSAPP_URL = "https://wa.me/493012345678"  # WhatsApp: +49 30 12345678
 EMAIL = "elena.kravtsova@example.com"  # Психолог Елена Кравцова
 
