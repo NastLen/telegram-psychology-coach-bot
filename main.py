@@ -60,7 +60,12 @@ async def start_bot():
     
     try:
         logger.info("🤖 Bot started polling...")
-        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+        # Disable signal handling to avoid conflicts in multi-threaded environment (Render + Uvicorn)
+        await dp.start_polling(
+            bot, 
+            allowed_updates=dp.resolve_used_update_types(),
+            handle_signals=False  # Отключаем обработку SIGINT/SIGTERM
+        )
     except Exception as e:
         logger.error(f"Bot error: {e}")
     finally:
