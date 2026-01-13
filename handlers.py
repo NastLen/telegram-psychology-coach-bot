@@ -86,11 +86,28 @@ async def faq_handler(message: Message):
 @router.message(F.text == "📞 Контакты")
 async def contact_handler(message: Message):
     """Contact information"""
-    await message.answer(
-        CONTACT_TEXT,
-        reply_markup=get_contact_inline_keyboard(WHATSAPP_URL, EMAIL),
-        parse_mode="HTML"
+    contact_message = f"""
+📞 Контакты
+
+Есть вопросы перед бронированием? Напишите мне:
+
+📧 Email: {EMAIL}
+💬 WhatsApp: нажмите кнопку ниже
+
+Или задайте вопрос прямо боту — я передам его менеджеру.
+"""
+    
+    from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+    
+    buttons = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="💬 WhatsApp", url=WHATSAPP_URL)],
+            [InlineKeyboardButton(text="📧 Email", url=f"mailto:{EMAIL}")],
+            [InlineKeyboardButton(text="❓ Задать вопрос", callback_data="ask_question")],
+        ]
     )
+    
+    await message.answer(contact_message, reply_markup=buttons)
 
 @router.message(F.text == "📅 Забронировать")
 async def book_handler(message: Message):
