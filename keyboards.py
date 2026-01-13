@@ -41,7 +41,7 @@ def get_contact_inline_keyboard(whatsapp_url, email):
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text=BTN_WHATSAPP, url=whatsapp_url)],
-            [InlineKeyboardButton(text="📧 Write Email", url=f"mailto:{email}")],
+            [InlineKeyboardButton(text=BTN_EMAIL, url=f"mailto:{email}")],
             [InlineKeyboardButton(text=BTN_ASK_QUESTION, callback_data="ask_question")],
         ]
     )
